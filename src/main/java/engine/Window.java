@@ -25,4 +25,9 @@ public class Window {
             throw new RuntimeException("Window was null. Is OpenGL 3.3 supported on your system?");
         }
     }
+
+    public void close() {
+        glfwDestroyWindow(this.handle);
+        glfwTerminate();
+    }
 }

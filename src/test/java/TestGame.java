@@ -1,7 +1,7 @@
 import engine.*;
 import graphics.Texture;
 import math.Color;
-import math.Vector2;
+import org.joml.Vector2f;
 
 public class TestGame extends Game {
     private Texture texture;
@@ -25,7 +25,9 @@ public class TestGame extends Game {
         graphics.clear(new Color(1.0f, 0.5f, 0.25f, 1.0f));
 
         graphics.spriteRenderer.begin();
-        graphics.spriteRenderer.draw(this.texture, new Vector2(0, 0), new Vector2(512, 0), new Vector2(0, 512), new Vector2(512, 512), Color.WHITE);
+        for (int i = 0; i < 10; i++) {
+            graphics.spriteRenderer.draw(this.texture, new Vector2f(i * 50), Color.WHITE);
+        }
         graphics.spriteRenderer.end();
     }
 }

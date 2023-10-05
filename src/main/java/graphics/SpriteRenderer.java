@@ -3,6 +3,7 @@ package graphics;
 import math.Color;
 import math.Vector2;
 import org.joml.Matrix4f;
+import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
 
 import java.nio.FloatBuffer;
@@ -89,7 +90,18 @@ public class SpriteRenderer {
         this.flush();
     }
 
-    public void draw(Texture texture, Vector2 topLeft, Vector2 topRight, Vector2 bottomLeft, Vector2 bottomRight, Color tint) {
+    public void draw(Texture texture, Vector2f position, Color tint) {
+        // GOTTA GET ALL THE HEAP ALLOCATION IN HERE
+        // CAUSE WHY HAVE STACK ALLOCATION AMIRITE???!!!
+        Vector2f topLeft = position;
+        Vector2f topRight = new Vector2f(position.x + texture.size.width, position.y);
+        Vector2f bottomLeft = new Vector2f(position.x, position.y + texture.size.height);
+        Vector2f bottomRight = new Vector2f(position.x + texture.size.width, position.y + texture.size.height);
+
+        this.draw(texture, topLeft, topRight, bottomLeft, bottomRight, tint);
+    }
+
+    public void draw(Texture texture, Vector2f topLeft, Vector2f topRight, Vector2f bottomLeft, Vector2f bottomRight, Color tint) {
         if (this.currentTexture != texture || this.currentSprite >= MAX_SPRITES) {
             this.flush();
         }
@@ -134,6 +146,8 @@ public class SpriteRenderer {
         this.vertices[vOffset + 29] = tint.g;
         this.vertices[vOffset + 30] = tint.b;
         this.vertices[vOffset + 31] = tint.a;
+
+        vOffset = vOffset / 8;
 
         this.indices[iOffset + 0] = 0 + vOffset;
         this.indices[iOffset + 1] = 1 + vOffset;

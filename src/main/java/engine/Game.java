@@ -26,6 +26,8 @@ public class Game {
             glfwSwapInterval(1);
             glfwSwapBuffers(this.window.handle);
         }
+
+        this.window.close();
     }
 
     protected void init() {}
