@@ -14,4 +14,12 @@ public class Vector2 {
         this.x = scalar;
         this.y = scalar;
     }
+
+    @Override
+    public String toString() {
+        return "Vector2{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }

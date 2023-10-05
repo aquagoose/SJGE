@@ -23,6 +23,7 @@ public class Game {
             update();
             draw();
 
+            glfwSwapInterval(1);
             glfwSwapBuffers(this.window.handle);
         }
     }
